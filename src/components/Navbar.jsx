@@ -5,20 +5,20 @@ import { NavLinks } from './NavLinks';
 import { useEffect, useState } from 'react';
 
 const themes = {
-  coffee: 'coffee',
+  dracula: 'dracula',
   winter: 'winter',
 };
 
 const LS_THEME_KEY = 'comfy-theme';
 
 const getInitialTheme = () =>
-  localStorage.getItem(LS_THEME_KEY) || themes.coffee;
+  localStorage.getItem(LS_THEME_KEY) || themes.dracula;
 
 export const Navbar = () => {
   const [theme, setTheme] = useState(() => getInitialTheme());
 
   const handleChange = () => {
-    const newTheme = theme === themes.coffee ? themes.winter : themes.coffee;
+    const newTheme = theme === themes.dracula ? themes.winter : themes.dracula;
     setTheme(newTheme);
   };
 

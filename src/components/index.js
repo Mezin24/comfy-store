@@ -4,3 +4,7 @@ export { Header } from './Header';
 export { NavLinks } from './NavLinks';
 export { Navbar } from './Navbar';
 export { Hero } from './Hero';
+export { ErrorElement } from './ErrorElement';
+export { FeaturedProducts } from './FeaturedProducts';
+export { ProductsGrid } from './ProductsGrid';
+export { SectionTitle } from './SectionTitle';
