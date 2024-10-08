@@ -8,3 +8,6 @@ export { ErrorElement } from './ErrorElement';
 export { FeaturedProducts } from './FeaturedProducts';
 export { ProductsGrid } from './ProductsGrid';
 export { SectionTitle } from './SectionTitle';
+export { Filters } from './Filters';
+export { ProductsContainer } from './ProductsContainer';
+export { PaginationContainer } from './PaginationContainer';

@@ -1,4 +1,11 @@
-export const FormInput = ({ label, name, type, defaultValue }) => {
+export const FormInput = ({
+  label,
+  name,
+  type,
+  defaultValue,
+  size,
+  placeholder = '',
+}) => {
   return (
     <label className='form-control'>
       <div className='label'>
@@ -6,8 +13,8 @@ export const FormInput = ({ label, name, type, defaultValue }) => {
       </div>
       <input
         type={type}
-        placeholder='Type here'
-        className='input input-bordered'
+        placeholder={placeholder}
+        className={`input input-bordered ${size}`}
         defaultValue={defaultValue}
         name={name}
       />
