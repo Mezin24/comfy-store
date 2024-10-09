@@ -1,44 +1,61 @@
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 export const PaginationContainer = () => {
   const { meta } = useLoaderData();
   const { page, pageCount } = meta.pagination;
+  const navigate = useNavigate();
+  const { pathname, search } = useLocation();
+
+  const handleClick = (page) => {
+    const searchParams = new URLSearchParams(search);
+    searchParams.set('page', page);
+    const query = `${pathname}?${searchParams.toString()}`;
+    navigate(query);
+  };
 
   const btns = Array.from({ length: pageCount }, (_, index) => {
     const btnIndex = index + 1;
     return (
-      <Link
+      <button
         key={btnIndex}
-        className={`join-item btn btn-sm ${btnIndex === page && 'btn-active'}`}
-        to={`/products?page=${btnIndex}`}
+        className={`join-item btn btn-sm sm:btn-md ${
+          btnIndex === page && 'btn-active'
+        }`}
+        onClick={() => handleClick(btnIndex)}
       >
         {btnIndex}
-      </Link>
+      </button>
     );
   });
-  console.log(page);
+
+  if (pageCount < 2) return null;
+
   return (
-    <div className='join mt-5 flex justify-end'>
-      <Link
-        className={`join-item btn btn-sm ${page === 1 && 'btn-disabled'}`}
-        to={`/products?page=${page === 1 ? '1' : page - 1}`}
+    <div className='join mt-16 flex justify-end'>
+      <button
+        className={`join-item btn btn-sm sm:btn-md ${
+          page === 1 && 'btn-disabled'
+        }`}
+        onClick={() => {
+          if (page === 1) return;
+          handleClick(page - 1);
+        }}
       >
         Prev
-      </Link>
+      </button>
       {btns}
-      <Link
-        className={`join-item btn btn-sm ${
+      <button
+        className={`join-item btn btn-sm sm:btn-md ${
           page === pageCount && 'btn-disabled'
         }`}
-        to={`/products?page=${page === pageCount ? page : page + 1}`}
+        onClick={() => {
+          if (page === pageCount) return;
+          handleClick(page + 1);
+        }}
       >
         Next
-      </Link>
+      </button>
     </div>
   );
 };
-
-{
-  /* <button className='join-item btn btn-disabled'>...</button> */
-}
