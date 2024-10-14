@@ -12,3 +12,5 @@ export { Filters } from './Filters';
 export { ProductsContainer } from './ProductsContainer';
 export { PaginationContainer } from './PaginationContainer';
 export { Loading } from './Loading';
+export { CartTotals } from './CartTotals';
+export { CartItemsList } from './CartItemsList';
