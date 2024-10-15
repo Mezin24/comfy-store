@@ -4,9 +4,11 @@ import { CartItemsList } from '../components/CartItemsList';
 import { CartTotals } from '../components/CartTotals';
 import { Link } from 'react-router-dom';
 import { getCartState } from '../features/cart/cartSelectors';
+import { getUser } from '../features/user/userSelectors';
 
 export const Cart = () => {
-  const user = null;
+  const user = useSelector(getUser);
+
   const { numItemsInCart } = useSelector(getCartState);
 
   if (numItemsInCart === 0) {

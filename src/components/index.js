@@ -14,3 +14,4 @@ export { PaginationContainer } from './PaginationContainer';
 export { Loading } from './Loading';
 export { CartTotals } from './CartTotals';
 export { CartItemsList } from './CartItemsList';
+export { CheckoutForm } from './CheckoutForm';

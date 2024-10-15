@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 
 export const themes = {
   dracula: 'dracula',
@@ -6,6 +7,7 @@ export const themes = {
 };
 
 const LS_THEME_KEY = 'comfy-theme';
+const LS_USER = 'comfy-user';
 
 const getInitialTheme = () => {
   const theme = localStorage.getItem(LS_THEME_KEY) || themes.dracula;
@@ -13,8 +15,12 @@ const getInitialTheme = () => {
   return theme;
 };
 
+const getInitialUser = () => {
+  return JSON.parse(localStorage.getItem(LS_USER)) || null;
+};
+
 const initialState = {
-  user: { username: 'Mezin' },
+  user: getInitialUser(),
   theme: getInitialTheme(),
 };
 
@@ -23,10 +29,14 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     loginUser: (state, { payload }) => {
-      console.log('login');
+      const user = { ...payload.user, token: payload.jwt };
+      localStorage.setItem(LS_USER, JSON.stringify(user));
+      state.user = user;
     },
     logoutUser: (state) => {
-      console.log('logout');
+      state.user = null;
+      localStorage.removeItem(LS_USER);
+      toast.success('Logged out successfuly');
     },
     toggleTheme: (state) => {
       state.theme =
