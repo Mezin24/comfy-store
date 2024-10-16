@@ -7,11 +7,9 @@ export const action = async ({ request }) => {
   const formData = await request.formData();
   const userData = Object.fromEntries(formData);
   try {
-    const { data } = await customFetch.post('/auth/local/register', userData);
-    const user = { ...data.user, token: data.jwt };
-
+    await customFetch.post('/auth/local/register', userData);
     toast.success('account created successfully');
-    return redirect('/');
+    return redirect('/login');
   } catch (error) {
     const errorMessage =
       error?.response?.data?.error?.message || 'please double check your data';

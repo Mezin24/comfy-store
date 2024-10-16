@@ -15,3 +15,5 @@ export { Loading } from './Loading';
 export { CartTotals } from './CartTotals';
 export { CartItemsList } from './CartItemsList';
 export { CheckoutForm } from './CheckoutForm';
+export { OrdersList } from './OrdersList';
+export { ComplexPaginationContainer } from './ComplexPaginationContainer';

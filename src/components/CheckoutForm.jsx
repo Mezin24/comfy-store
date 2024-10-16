@@ -25,19 +25,23 @@ export const action =
     };
 
     try {
-      const response = await customFetch.post(
+      await customFetch.post(
         '/orders',
         { data: info },
         { headers: { Authorization: `Bearer ${user.token}` } }
       );
       store.dispatch(clearCart());
       toast.success('order placed successfully');
-      return redirect('/ordres');
+      return redirect('/orders');
     } catch (error) {
       const errorMessage =
         error?.response?.data?.error?.message ||
         'there was an error placing your order';
       toast.error(errorMessage);
+
+      if (error.response.status === 401 || error.response.status === 403) {
+        redirect('/login');
+      }
       return null;
     }
   };
@@ -45,7 +49,7 @@ export const action =
 export const CheckoutForm = () => {
   return (
     <Form method='POST' className='flex flex-col gap-y-4'>
-      <h4 className='font-medium text-xl capitalize'>shipping informatio</h4>
+      <h4 className='font-medium text-xl capitalize'>shipping information</h4>
       <FormInput label='first name' name='name' type='text' />
       <FormInput label='address' name='address' type='text' />
       <div className='nt-4 '>
